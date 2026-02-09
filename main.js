@@ -18,12 +18,13 @@ Testa la funzione con la query "london"*/
 
 async function getDashboardData(query) {
     const nameCountryPromises = fetch(`http://localhost:3333/destinations?search=${query}`)
-        .then(nameCountry => nameCountry.json())
+        .then(res => res.json())
     const weatherPromises = fetch(`http://localhost:3333/weathers?search=${query}`)
-        .then(weather => weather.json())
+        .then(res => res.json())
     const airportPromises = fetch(`http://localhost:3333/airports?search=${query}`)
-        .then(airport => airport.json())
-    const [nameCountry, weather, airport] = await Promise.all([nameCountryPromises, weatherPromises, airportPromises])
+        .then(res => res.json())
+    const promises = [nameCountryPromises, weatherPromises, airportPromises]
+    const [nameCountry, weather, airport] = await Promise.all(promises)
 
     const data = {
         country: nameCountry[0].country,
