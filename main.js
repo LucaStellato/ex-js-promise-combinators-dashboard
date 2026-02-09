@@ -27,6 +27,7 @@ async function getDashboardData(query) {
     const [nameCountry, weather, airport] = await Promise.all(promises)
 
     const data = {
+        city: nameCountry[0].name,
         country: nameCountry[0].country,
         temperature: weather[0].temperature,
         weather: weather[0].weather_description,
@@ -39,12 +40,12 @@ async function getDashboardData(query) {
 
 }
 
-getDashboardData('london')
+
 getDashboardData('london')
     .then(data => {
         console.log('Dasboard data:', data);
         console.log(
-            `${data.name} is in ${data.country}.\n` +
+            `${data.city} is in ${data.country}.\n` +
             `Today there are ${data.temperature} degrees and the weather is ${data.weather}.\n` +
             `The main airport is ${data.airport}.\n`
         );
